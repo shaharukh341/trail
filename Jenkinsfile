@@ -1,7 +1,7 @@
 node{
      
     stage('SCM Checkout'){
-        git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/MithunTechnologiesDevOps/spring-boot-mongo-docker.git',branch: 'master'
+        git credentialsId: 'GIT_CREDENTIALS', url:  'https://github.com/shaharukh341/trail.git',branch: 'master'
     }
     
     stage(" Maven Clean Package"){
@@ -20,7 +20,7 @@ node{
         withCredentials([string(credentialsId: 'DOKCER_HUB_PASSWORD', variable: 'DOKCER_HUB_PASSWORD')]) {
           sh "docker login -u sharukh341 -p ${DOKCER_HUB_PASSWORD}"
         }
-        sh 'docker push shaharukh341/spring-boot-mongo'
+        sh 'docker push sharukh341/spring-boot-mongo'
      }
      
      stage("Deploy To Kuberates Cluster"){
