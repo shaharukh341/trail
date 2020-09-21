@@ -1,7 +1,6 @@
-
 # Config Map
-apiVersion: v1
-kind: ConfigMap
+kind: ConfigMap 
+apiVersion: v1 
 metadata:
   name: springapp-configmap
 data:
@@ -24,10 +23,10 @@ spec:
         app: springboot
     spec:
       containers:
-      - image: sharukh341/spring-boot-mongo
+      - image: dockerhandson/spring-boot-mongo
         name: springboot
         ports:
-        - containerPort: 8080
+        - containerPort: 8080  
         env:
         - name: MONGO_DB_HOSTNAME
           value: mongo
@@ -35,12 +34,12 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: springapp-configmap
-              key: username
+              key: username 
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             configMapKeyRef:
               name: springapp-configmap
-              key: password
+              key: password       
 ---
 # Node Port Service For SpringApp
 apiVersion: v1
@@ -77,12 +76,12 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: springapp-configmap
-              key: username
+              key: username 
         - name: MONGO_INITDB_ROOT_PASSWORD
           valueFrom:
             configMapKeyRef:
               name: springapp-configmap
-              key: password
+              key: password 
         ports:
         - containerPort: 27017
         volumeMounts:
@@ -105,5 +104,3 @@ spec:
     targetPort: 27017
   selector:
     app: mongo
-
-
